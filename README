@@ -1,0 +1,8 @@
+How to run this locally: Download all files, put them into 1 folder, open the folder with visual studio code, right click on index.html and select "Open with Live Server".
+
+Refinements from previous milestones:
+
+1. Add lables to x and y axis to describe what they are doing
+2. Improved color choice
+3. Fixed previous mismatch
+4. Implemented the interactive parallel plot: Click the ▲ button at the bottom of the page to open it. Then, click on the labels of the 4 vertical axis, and the plot will show up. You can also toggle health type from the drop down in the top right corner.
