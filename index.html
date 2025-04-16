@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Data driven poetry on health conditions of elderly people</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1 class="title">Roses: A Scrollytelling Experience</h1>
+    </header>
+    <main class="wrapper">
+      <div class="left-column">
+        <div class="left-column-content">
+          <!-- TODO Add filler verse divs so that the content is centered vertically even at the start -->
+          <div class="filler-verse"></div>
+          <ul class="verse" id="verse1">
+            <li class="line" id="line1">Some never seek help,</li>
+            <li class="line" id="line2">while others bear unseen pain,</li>
+            <li class="line" id="line3">names lost in the stats.</li>
+          </ul>
+          <ul class="verse" id="verse2">
+            <li class="line" id="line1">She names the burden,</li>
+            <li class="line" id="line2">he carries it in silence,</li>
+            <li class="line" id="line3">both are left unheard.</li>
+          </ul>
+          <ul class="verse" id="verse3">
+            <li class="line" id="line1">One stiff from farm work,</li>
+            <li class="line" id="line2">one chews with gums aching still,</li>
+            <li class="line" id="line3">both endure the day.</li>
+          </ul>
+          <ul class="verse" id="verse4">
+            <li class="line" id="line1">Gums ache in silence,</li>
+            <li class="line" id="line2">the joints of both age groups swell,</li>
+            <li class="line" id="line3">younger still pretend.</li>
+          </ul>
+          <ul class="verse" id="verse5">
+            <li class="line" id="line1">hands of all colors,</li>
+            <li class="line" id="line2">all hold the weight of kinship,</li>
+            <li class="line" id="line3">some lift it longer.</li>
+          </ul>
+          <ul class="verse" id="verse6">
+            <li class="line" id="line1">Insufficient sports,</li>
+            <li class="line" id="line2">some lack parks, some fear the risk,</li>
+            <li class="line" id="line3">both still feel the weight.</li>
+          </ul>
+          <ul class="verse" id="verse7">
+            <li class="line" id="line1">After sixty-four,</li>
+            <li class="line" id="line2">mobility keeps you from</li>
+            <li class="line" id="line3">accessing healthcare.</li>
+          </ul>
+          <ul class="verse" id="verse8">
+            <li class="line" id="line1">Risk fills every lung,</li>
+            <li class="line" id="line2">some speak less and wait longer—</li>
+            <li class="line" id="line3">need does not pronounce.</li>
+          </ul>
+          <ul class="verse" id="verse9">
+            <li class="line" id="line1">Smoke hides in old breath,</li>
+            <li class="line" id="line2">one numbs the wound, one denies,</li>
+            <li class="line" id="line3">many bottles dried.</li>
+          </ul>
+          <ul class="verse" id="verse10">
+            <li class="line" id="line1">Younger lights the flame,</li>
+            <li class="line" id="line2">elder drowns in quiet nights,</li>
+            <li class="line" id="line3">both chase something gone.</li>
+          </ul>
+          <ul class="verse" id="verse11">
+            <li class="line" id="line1">Memories ravel,</li>
+            <li class="line" id="line2">one speaks while another waits,</li>
+            <li class="line" id="line3">both are forgotten.</li>
+          </ul>
+          <ul class="verse" id="verse12">
+            <li class="line" id="line1">both forget their names,</li>
+            <li class="line" id="line2">one pretend he is still young,</li>
+            <li class="line" id="line3">one calls out for help</li>
+          </ul> 
+          <div class="filler-verse"></div>
+        </div>
+      </div>
+      <div class="right-column">
+        <svg id="svg"></svg>
+      </div>
+    </main>
+    <footer>
+      <button class="arrow-button" id="backward-button">◄</button>
+      <button class="arrow-button" id="openOverlayBtn">▲</button>
+      <button class="arrow-button" id="forward-button">►</button>
+    </footer>
+    <!-- the parallel plot -->
+    <div class="overlay-panel" id="plotPanel">
+      <button class="overlay-close-button" id="closeOverlayBtn">▼</button>
+      <div class="overlay-toolbar">
+        <label for="categorySelect">Health Category:</label>
+        <select id="categorySelect">
+          <option value="Mental Health">Mental Health</option>
+          <option value="Overall Health">Overall Health</option>
+          <option value="Caregiving">Caregiving</option>
+          <option value="Nutrition/Physical Activity/Obesity">Nutrition/Physical Activity/Obesity</option>
+          <option value="Screenings and Vaccines">Screenings and Vaccines</option>
+          <option value="Smoking and Alcohol Use">Smoking and Alcohol Use</option>
+          <option value="Cognitive Decline">Cognitive Decline</option>
+        </select>
+      </div>
+      
+      
+      <div class="overlay-chart">
+        <svg id="parallelPlot" width="600" height="400"></svg>
+      </div>
+    </div>    
+    <script src="main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>D3 Axis Click Connect</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    svg { font-family: sans-serif; }
+    .axis line, .axis path { stroke: #999; }
+    .tick text { cursor: pointer; }
+  </style>
+</head>
+<body>
+  <svg width="600" height="400"></svg>
+  <script>
+    const svg = d3.select("svg");
+    const width = svg.attr("width");
+    const height = svg.attr("height");
+
+    const features = [
+      { name: "Feature A", values: ["Low", "Med", "High"] },
+      { name: "Feature B", values: ["Red", "Green", "Blue"] },
+      { name: "Feature C", values: ["1", "2", "3"] }
+    ];
+
+    const lookupTable = {
+      "Low|Red|1": "Class X",
+      "High|Green|3": "Class Y"
+    };
+
+    const margin = { top: 40, bottom: 40 };
+    const axisHeight = height - margin.top - margin.bottom;
+    const axisSpacing = width / (features.length + 1);
+    const selectedValues = Array(features.length).fill(null);
+
+    const yScales = features.map(f =>
+      d3.scalePoint()
+        .domain(f.values)
+        .range([margin.top, height - margin.bottom])
+        .padding(0.5)
+    );
+
+    const axisGroups = svg.selectAll(".axis")
+      .data(features)
+      .enter()
+      .append("g")
+      .attr("class", "axis")
+      .attr("transform", (_, i) => `translate(${axisSpacing * (i + 1)}, 0)`)
+      .each(function(feature, i) {
+        const axis = d3.axisLeft(yScales[i])
+          .tickSize(0)
+          .tickPadding(10);
+        d3.select(this).call(axis);
+
+        // Add clickable text for each tick
+        d3.select(this).selectAll(".tick text")
+          .style("fill", "black")
+          .on("click", function(event, d) {
+            selectedValues[i] = d;
+            updateLine();
+          });
+      });
+
+    // Draw connecting polyline
+    const linePath = svg.append("path")
+      .attr("fill", "none")
+      .attr("stroke", "steelblue")
+      .attr("stroke-width", 2);
+
+    // Display result label
+    const label = svg.append("text")
+      .attr("x", width / 2)
+      .attr("y", 30)
+      .attr("text-anchor", "middle")
+      .attr("font-size", "16px")
+      .style("visibility", "hidden");
+
+    function updateLine() {
+      const points = selectedValues.map((val, i) => {
+        if (!val) return null;
+        return [
+          axisSpacing * (i + 1),
+          yScales[i](val)
+        ];
+      });
+
+      if (points.some(p => p === null)) {
+        linePath.attr("d", null);
+        label.style("visibility", "hidden");
+        return;
+      }
+
+      const lineGen = d3.line();
+      linePath.attr("d", lineGen(points));
+
+      // Look up label
+      const key = selectedValues.join("|");
+      const result = lookupTable[key] || "No match";
+      label.text(result).style("visibility", "visible");
+    }
+  </script>
+</body>
+</html>
