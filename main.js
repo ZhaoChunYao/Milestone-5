@@ -821,7 +821,7 @@ function updateBarChart(data, title = "") {
         .style("fill", "white")
         .style("font-size", "14px")
         .style("font-family", "sans-serif")
-        .text("Avg. health score of the group");
+        .text("avg. health score of the group");
 
 
 }
